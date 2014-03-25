@@ -1,4 +1,4 @@
 CobraFeats
 ==========
 
-Random semi-useful features for the Bukkit Minecraft server.
+A collection of random semi-useful features for the Bukkit Minecraft server.
