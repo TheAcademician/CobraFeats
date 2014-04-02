@@ -1,0 +1,14 @@
+name: CobraFeats
+version: 1.0
+author: TheAcademician
+main: us.drome.cobrafeats.CobraFeats
+
+permissions:
+    cfeats.admin:
+        description: Access to feature configuration commands.
+
+commands:
+    cfeats:
+        description: Show enabled features or reload
+        permission: cfeats.admin
+        usage: /cfeats [<reload>]
