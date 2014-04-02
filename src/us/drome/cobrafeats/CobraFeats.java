@@ -1,6 +1,7 @@
 package us.drome.cobrafeats;
 
 import java.io.File;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,6 +35,7 @@ public class CobraFeats extends JavaPlugin {
             } else {
                 if(args[0].equalsIgnoreCase("reload")) {
                     config.reload();
+                    sender.sendMessage(ChatColor.LIGHT_PURPLE + "[CobraFeats] Config Reloaded");
                 } else
                     return false;
             }
