@@ -2,8 +2,11 @@ package us.drome.cobrafeats;
 
 import java.io.File;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CobraFeats extends JavaPlugin {
@@ -25,6 +28,9 @@ public class CobraFeats extends JavaPlugin {
         }
         config.load();
         getServer().getPluginManager().registerEvents(listener, this);
+        
+        registerRecipes();
+        
         getLogger().info("version " + getDescription().getVersion() + " has finished loading.");
     }
     
@@ -41,5 +47,16 @@ public class CobraFeats extends JavaPlugin {
             }
         }
         return true;
+    }
+    
+    public void registerRecipes() {
+        if(config.AESTHETIC_COMMAND_BLOCKS) {
+            ShapedRecipe commandBlock = new ShapedRecipe(new ItemStack(Material.COMMAND))
+                .shape("aba", "bcb", "aba")
+                .setIngredient('a', Material.HARD_CLAY)
+                .setIngredient('b', Material.REDSTONE_WIRE)
+                .setIngredient('c', Material.IRON_INGOT);
+            getServer().addRecipe(commandBlock);
+        }
     }
 }
