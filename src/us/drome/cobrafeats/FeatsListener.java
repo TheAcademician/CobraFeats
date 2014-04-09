@@ -63,9 +63,10 @@ public class FeatsListener implements Listener {
         
         if(plugin.config.AESTHETIC_COMMAND_BLOCKS) {
             if(block.getType().equals(Material.MOB_SPAWNER) && event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
-                block.breakNaturally();
-                ItemStack commandBlock = new ItemStack(Material.COMMAND);
-                block.getWorld().dropItem(block.getLocation(), commandBlock);
+                if(block.breakNaturally()) {
+                    ItemStack commandBlock = new ItemStack(Material.COMMAND);
+                    block.getWorld().dropItem(block.getLocation(), commandBlock);
+                }
             }
         }
     }
@@ -75,7 +76,7 @@ public class FeatsListener implements Listener {
         Block block = event.getClickedBlock();
         
         if(plugin.config.AESTHETIC_COMMAND_BLOCKS) {
-            if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && block.getType().equals(Material.COMMAND)) {
+            if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && (!event.getPlayer().isSneaking()) && block.getType().equals(Material.COMMAND)) {
                 event.setCancelled(true);
             }
         }
