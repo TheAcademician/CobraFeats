@@ -8,7 +8,6 @@ import org.bukkit.block.CreatureSpawner;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -25,9 +24,10 @@ public class FeatsListener implements Listener {
     
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
+        Block block = event.getBlock();
+        ItemStack tool = event.getPlayer().getItemInHand();
+            
         if(plugin.config.SILK_TOUCH_SPAWNERS) {
-            Block block = event.getBlock();
-            ItemStack tool = event.getPlayer().getItemInHand();
             if(block.getType().equals(Material.MOB_SPAWNER) && isPickaxe(tool) && isSilkTouch(tool)) {
                 ItemStack spawner = new ItemStack(Material.MOB_SPAWNER);
                 ItemMeta spawnerMeta = spawner.getItemMeta();
@@ -37,6 +37,14 @@ public class FeatsListener implements Listener {
                 spawner.setItemMeta(spawnerMeta);
                 
                 block.getWorld().dropItem(block.getLocation(), spawner);
+            }
+        }
+        
+        if(plugin.config.AESTHETIC_COMMAND_BLOCKS) {
+            if(block.getType().equals(Material.COMMAND) && event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
+                if(block.breakNaturally()) {
+                    block.getWorld().dropItem(block.getLocation(), new ItemStack(Material.COMMAND));
+                }
             }
         }
     }
@@ -62,11 +70,8 @@ public class FeatsListener implements Listener {
         Block block = event.getBlock();
         
         if(plugin.config.AESTHETIC_COMMAND_BLOCKS) {
-            if(block.getType().equals(Material.MOB_SPAWNER) && event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
-                if(block.breakNaturally()) {
-                    ItemStack commandBlock = new ItemStack(Material.COMMAND);
-                    block.getWorld().dropItem(block.getLocation(), commandBlock);
-                }
+            if(block.getType().equals(Material.COMMAND) && event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
+                plugin.getServer().getPluginManager().callEvent(new BlockBreakEvent(block, event.getPlayer()));
             }
         }
     }
@@ -74,12 +79,6 @@ public class FeatsListener implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
-        
-        if(plugin.config.AESTHETIC_COMMAND_BLOCKS) {
-            if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && (!event.getPlayer().isSneaking()) && block.getType().equals(Material.COMMAND)) {
-                event.setCancelled(true);
-            }
-        }
     }
     
     

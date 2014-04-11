@@ -16,6 +16,7 @@ public class CobraFeats extends JavaPlugin {
     public void onDisable() {
         getLogger().info("version " + getDescription().getVersion() + " has begun unloading...");
         config.save();
+        getServer().clearRecipes();
         getLogger().info("version " + getDescription().getVersion() + " has finished unloading.");
     }
     
@@ -54,7 +55,7 @@ public class CobraFeats extends JavaPlugin {
             ShapedRecipe commandBlock = new ShapedRecipe(new ItemStack(Material.COMMAND))
                 .shape("aba", "bcb", "aba")
                 .setIngredient('a', Material.HARD_CLAY)
-                .setIngredient('b', Material.REDSTONE_WIRE)
+                .setIngredient('b', Material.REDSTONE)
                 .setIngredient('c', Material.IRON_INGOT);
             getServer().addRecipe(commandBlock);
         }
