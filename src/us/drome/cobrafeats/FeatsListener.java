@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -79,6 +80,27 @@ public class FeatsListener implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
+        ItemStack item = event.getItem();
+        Player player = event.getPlayer();
+        
+        if(plugin.config.RAIN_WATER_BUCKETS) {
+            if(item.getType().equals(Material.BUCKET)) {
+                if(block.getType().equals(Material.AIR) && player.getWorld().isThundering()) {
+                    //if used on AIR and it is raining...
+                } else if(block.getType().equals(Material.WATER)) {
+                    
+                }
+            }
+            
+            if(block.getType().equals(Material.AIR) && item.getType().equals(Material.BUCKET)) {
+                ItemMeta bucketMeta = item.getItemMeta();
+                if(bucketMeta.hasLore()) {
+                    
+                } else {
+                    bucketMeta.setLore(new ArrayList<String>(){{ add("Fill: 1/5");}});
+                }
+            }
+        }
     }
     
     
