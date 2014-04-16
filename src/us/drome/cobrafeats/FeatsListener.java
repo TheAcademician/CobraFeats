@@ -91,24 +91,31 @@ public class FeatsListener implements Listener {
                     if(plugin.isRaining(player.getLocation()) && plugin.isOutside(player.getEyeLocation())) {
                         List<String> bucketLore = itemMeta.getLore();
                         String fillLore = "";
-                        for(String lore : bucketLore) {
-                            if(lore.contains("Fill Level:")) {
+                        if(bucketLore == null) {
+                            bucketLore.add("Fill Level: 1");
+                            itemMeta.setLore(bucketLore);
+                            item.setItemMeta(itemMeta);
+                        } else {
+                            for(String lore : bucketLore) {
+                                if(lore.contains("Fill Level:")) {
                                 fillLore = lore;
+                                }
                             }
-                        }
-                        if(!fillLore.isEmpty()) {
-                            int fillLevel = Integer.parseInt(fillLore.split(":")[1]);
-                            if(fillLevel == 100) {
-                                item.setType(Material.WATER_BUCKET);
+                            
+                            if(!fillLore.isEmpty()) {
+                                int fillLevel = Integer.parseInt(fillLore.split(":")[1]);
+                                if(fillLevel == 100) {
+                                    item.setType(Material.WATER_BUCKET);
+                                } else {
+                                    bucketLore.set(bucketLore.indexOf(fillLore), "Fill Level: " + fillLevel++);
+                                    itemMeta.setLore(bucketLore);
+                                    item.setItemMeta(itemMeta);
+                                }
                             } else {
-                                bucketLore.set(bucketLore.indexOf(fillLore), "Fill Level: " + fillLevel++);
+                                bucketLore.add("Fill Level: 1");
                                 itemMeta.setLore(bucketLore);
                                 item.setItemMeta(itemMeta);
                             }
-                        } else {
-                            bucketLore.set(bucketLore.indexOf(fillLore), "Fill Level: 1");
-                            itemMeta.setLore(bucketLore);
-                            item.setItemMeta(itemMeta);
                         }
                     }
                 } else if(block.getType().equals(Material.WATER) || block.getType().equals(Material.LAVA)) {
