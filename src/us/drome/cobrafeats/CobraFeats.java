@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
@@ -81,6 +82,7 @@ public class CobraFeats extends JavaPlugin {
     }
     
     public boolean isRaining(Location location) {
+        Block block = location.getBlock();
         if(location.getWorld().hasStorm()) {
             if(location.getWorld().getTemperature(location.getBlockX(), location.getBlockZ()) > .15) {
                 return true;
