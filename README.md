@@ -19,7 +19,22 @@ A collection of random semi-useful features for the Bukkit Minecraft server.
   * Commands: None
   * Permissions: None
   * Config: rain-water-buckets
-4. Growing Lily Pads
+4. Perma-Dirt Recipe
+  * Adds a recipe to craft dirt that is not affected by grass or mycelium spread, uses three dirt in slab pattern.
+  * Commands: None
+  * Permissions: None
+  * Config: perma-dirt-recipe
+5. Pozdol Recipe
+  * Recipe for the creation of Podzol using dirt and leaves.
+  * Commands: None
+  * Permissions: None
+  * Config: podzol-recipe
+6. Mycelium Recipe
+  * Adds a recipe for the creation of mycelium using dirt and mushroom soup.
+  * Commands: None
+  * Permissions: None
+  * Config: mycelium-recipe
+7. Growing Lily Pads
   * Makes lily pads spread naturally in swamps and growable with bonemeal.
   * Commands: None
   * Permissions: None
