@@ -3,22 +3,18 @@ package us.drome.cobrafeats;
 import java.io.File;
 import java.util.ArrayList;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Biome;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CobraFeats extends JavaPlugin {
     public final Configuration config = new Configuration(this);
-    private FeatsListener listener = new FeatsListener(this);
-    
+
     public void onDisable() {
         getLogger().info("version " + getDescription().getVersion() + " has begun unloading...");
         config.save();
@@ -34,7 +30,10 @@ public class CobraFeats extends JavaPlugin {
             saveConfig();
         }
         config.load();
-        getServer().getPluginManager().registerEvents(listener, this);
+        
+        (new SilkTouchSpawners(this)).registerEvents();
+        (new AestheticCommandBlocks(this)).registerEvents();
+        (new RainWaterBuckets(this)).registerEvents();
         
         registerRecipes();
         
@@ -48,6 +47,7 @@ public class CobraFeats extends JavaPlugin {
             } else {
                 if(args[0].equalsIgnoreCase("reload")) {
                     config.reload();
+                    registerRecipes();
                     sender.sendMessage(ChatColor.LIGHT_PURPLE + "[CobraFeats] Config Reloaded");
                 } else
                     return false;
@@ -57,6 +57,8 @@ public class CobraFeats extends JavaPlugin {
     }
     
     public void registerRecipes() {
+        getServer().resetRecipes();
+        
         if(config.AESTHETIC_COMMAND_BLOCKS) {
             ShapedRecipe commandBlock = new ShapedRecipe(new ItemStack(Material.COMMAND))
                 .shape("aba", "bcb", "aba")
@@ -65,40 +67,34 @@ public class CobraFeats extends JavaPlugin {
                 .setIngredient('c', Material.IRON_INGOT);
             getServer().addRecipe(commandBlock);
         }
-    }
-    
-    public boolean isPickaxe(ItemStack tool) {
-        Material toolType = tool.getType();
-        if(toolType.equals(Material.WOOD_PICKAXE) || toolType.equals(Material.STONE_PICKAXE) || toolType.equals(Material.IRON_PICKAXE) ||
-                toolType.equals(Material.GOLD_PICKAXE) || toolType.equals(Material.DIAMOND_PICKAXE)) {
-            return true;
-        } else {
-            return false;
+        
+        if(config.PERMA_DIRT_RECIPE) {
+            ItemStack permaDirtItem = new ItemStack(Material.DIRT, 3);
+            ItemMeta permaDirtMeta = permaDirtItem.getItemMeta();
+            permaDirtMeta.setDisplayName("Permanent Dirt");
+            permaDirtMeta.setLore(new ArrayList<String>() {{ add("Prevents grass, weeds, and mushrooms!"); }});
+            permaDirtItem.setItemMeta(permaDirtMeta);
+            permaDirtItem.setDurability((short)1);
+            ShapedRecipe permaDirt = new ShapedRecipe(permaDirtItem)
+                    .shape("aaa")
+                    .setIngredient('a', Material.DIRT);
+            getServer().addRecipe(permaDirt);
         }
-    }
-    
-    public boolean isSilkTouch(ItemStack tool) {
-        return (tool.getEnchantments().containsKey(Enchantment.SILK_TOUCH) ? true : false);
-    }
-    
-    public boolean isRaining(Location location) {
-        Block block = location.getBlock();
-        if(location.getWorld().hasStorm()) {
-            if(location.getWorld().getTemperature(location.getBlockX(), location.getBlockZ()) > .15) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
+        
+        if(config.PODZOL_RECIPE) {
+            ItemStack podzolItem = new ItemStack(Material.DIRT);
+            podzolItem.setDurability((short)2);
+            ShapelessRecipe podzol = new ShapelessRecipe(podzolItem)
+                    .addIngredient(Material.DIRT)
+                    .addIngredient(Material.LEAVES);
+            getServer().addRecipe(podzol);
         }
-    }
-    
-    public boolean isOutside(Location location) {
-        if(location.getWorld().getHighestBlockYAt(location) < location.getBlockY()) {
-            return true;
-        } else {
-            return false;
+        
+        if(config.MYCELIUM_RECIPE) {
+            ShapelessRecipe mycelium = new ShapelessRecipe(new ItemStack(Material.MYCEL))
+                    .addIngredient(Material.DIRT)
+                    .addIngredient(Material.MUSHROOM_SOUP);
+            getServer().addRecipe(mycelium);
         }
     }
 }

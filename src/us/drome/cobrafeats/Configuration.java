@@ -10,6 +10,9 @@ public class Configuration {
     public boolean SILK_TOUCH_SPAWNERS;
     public boolean AESTHETIC_COMMAND_BLOCKS;
     public boolean RAIN_WATER_BUCKETS;
+    public boolean PERMA_DIRT_RECIPE;
+    public boolean PODZOL_RECIPE;
+    public boolean MYCELIUM_RECIPE;
     
     public Configuration(CobraFeats instance) {
         plugin = instance;
@@ -27,6 +30,9 @@ public class Configuration {
         SILK_TOUCH_SPAWNERS = plugin.getConfig().getBoolean("silk-touch-spawners", false);
         AESTHETIC_COMMAND_BLOCKS = plugin.getConfig().getBoolean("aesthetic-command-blocks", false);
         RAIN_WATER_BUCKETS = plugin.getConfig().getBoolean("rain-water-buckets", false);
+        PERMA_DIRT_RECIPE = plugin.getConfig().getBoolean("perma-dirt-recipe", false);
+        PODZOL_RECIPE = plugin.getConfig().getBoolean("podzol-recipe", false);
+        MYCELIUM_RECIPE = plugin.getConfig().getBoolean("mycelium-recipe", false);
     }
     
     public void reload() {
