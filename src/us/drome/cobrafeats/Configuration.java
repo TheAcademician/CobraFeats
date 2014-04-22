@@ -45,7 +45,10 @@ public class Configuration {
         
         settings.add(ChatColor.GOLD + "Silk Touch Spawners: " + statusCheck(SILK_TOUCH_SPAWNERS));
         settings.add(ChatColor.GOLD + "Aesthetic Command Blocks: " + statusCheck(AESTHETIC_COMMAND_BLOCKS));
-        settings.add(ChatColor.GOLD + "Rain Water Buckers: " + statusCheck(RAIN_WATER_BUCKETS));
+        settings.add(ChatColor.GOLD + "Rain Water Buckets: " + statusCheck(RAIN_WATER_BUCKETS));
+        settings.add(ChatColor.GOLD + "Perma-Dirt Recipe: " + statusCheck(PERMA_DIRT_RECIPE));
+        settings.add(ChatColor.GOLD + "Podzol Recipe: " + statusCheck(PODZOL_RECIPE));
+        settings.add(ChatColor.GOLD + "Mycelium Recipe: " + statusCheck(MYCELIUM_RECIPE));
         
         return settings.toArray(new String[settings.size()]);
     }
