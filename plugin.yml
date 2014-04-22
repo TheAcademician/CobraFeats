@@ -6,6 +6,7 @@ main: us.drome.cobrafeats.CobraFeats
 permissions:
     cfeats.admin:
         description: Access to feature configuration commands.
+        default: op
 
 commands:
     cfeats:

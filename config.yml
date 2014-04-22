@@ -1,3 +1,6 @@
 silk-touch-spawners: false
 aesthetic-command-blocks: false
 rain-water-buckets: false
+perma-dirt-recipe: false
+podzol-recipe: false
+mycelium-recipe: false
