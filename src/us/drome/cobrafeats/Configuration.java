@@ -10,6 +10,7 @@ public class Configuration {
     public boolean SILK_TOUCH_SPAWNERS;
     public boolean AESTHETIC_COMMAND_BLOCKS;
     public boolean RAIN_WATER_BUCKETS;
+    
     public boolean PERMA_DIRT_RECIPE;
     public boolean PODZOL_RECIPE;
     public boolean MYCELIUM_RECIPE;
@@ -27,12 +28,15 @@ public class Configuration {
     public void load() {
         plugin.reloadConfig();
         
+        //Features
         SILK_TOUCH_SPAWNERS = plugin.getConfig().getBoolean("silk-touch-spawners", false);
         AESTHETIC_COMMAND_BLOCKS = plugin.getConfig().getBoolean("aesthetic-command-blocks", false);
         RAIN_WATER_BUCKETS = plugin.getConfig().getBoolean("rain-water-buckets", false);
-        PERMA_DIRT_RECIPE = plugin.getConfig().getBoolean("perma-dirt-recipe", false);
-        PODZOL_RECIPE = plugin.getConfig().getBoolean("podzol-recipe", false);
-        MYCELIUM_RECIPE = plugin.getConfig().getBoolean("mycelium-recipe", false);
+        
+        //Recipes
+        PERMA_DIRT_RECIPE = plugin.getConfig().getBoolean("recipes.perma-dirt", false);
+        PODZOL_RECIPE = plugin.getConfig().getBoolean("recipes.podzol", false);
+        MYCELIUM_RECIPE = plugin.getConfig().getBoolean("recipes.mycelium", false);
     }
     
     public void reload() {
@@ -43,12 +47,16 @@ public class Configuration {
         List<String> settings = new ArrayList<>();
         settings.add(ChatColor.RED + "-=/" + ChatColor.RESET + "Current Cobra Feature Status" + ChatColor.RED + "\\=-");
         
+        //Features
         settings.add(ChatColor.GOLD + "Silk Touch Spawners: " + statusCheck(SILK_TOUCH_SPAWNERS));
         settings.add(ChatColor.GOLD + "Aesthetic Command Blocks: " + statusCheck(AESTHETIC_COMMAND_BLOCKS));
         settings.add(ChatColor.GOLD + "Rain Water Buckets: " + statusCheck(RAIN_WATER_BUCKETS));
-        settings.add(ChatColor.GOLD + "Perma-Dirt Recipe: " + statusCheck(PERMA_DIRT_RECIPE));
-        settings.add(ChatColor.GOLD + "Podzol Recipe: " + statusCheck(PODZOL_RECIPE));
-        settings.add(ChatColor.GOLD + "Mycelium Recipe: " + statusCheck(MYCELIUM_RECIPE));
+        
+        //Recipes
+        settings.add(ChatColor.GOLD + "Recipes:");
+        settings.add(ChatColor.GOLD + " - Perma-Dirt: " + statusCheck(PERMA_DIRT_RECIPE));
+        settings.add(ChatColor.GOLD + " - Podzol: " + statusCheck(PODZOL_RECIPE));
+        settings.add(ChatColor.GOLD + " - Mycelium: " + statusCheck(MYCELIUM_RECIPE));
         
         return settings.toArray(new String[settings.size()]);
     }
