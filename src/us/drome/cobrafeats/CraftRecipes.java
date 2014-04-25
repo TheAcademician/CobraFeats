@@ -17,21 +17,36 @@ public class CraftRecipes {
     public void register() {
         plugin.getServer().resetRecipes();
         
-        if(plugin.config.AESTHETIC_COMMAND_BLOCKS) {
+        if(plugin.config.AESTHETIC_COMMAND_BLOCKS) 
             plugin.getServer().addRecipe(commandBlock());
-        }
-        
-        if(plugin.config.PERMA_DIRT_RECIPE) {
+
+        if(plugin.config.PERMA_DIRT_RECIPE) 
             plugin.getServer().addRecipe(permaDirt());
-        }
-        
+
         if(plugin.config.PODZOL_RECIPE) {
             plugin.getServer().addRecipe(podzol());
             plugin.getServer().addRecipe(podzol2());
         }
         
-        if(plugin.config.MYCELIUM_RECIPE) {
+        if(plugin.config.MYCELIUM_RECIPE) 
             plugin.getServer().addRecipe(mycelium());
+
+        if(plugin.config.END_PORTAL_FRAME_RECIPE)
+            plugin.getServer().addRecipe(endPortalFrame());
+        
+        if(plugin.config.CRACKED_STONE_BRICK_RECIPE)
+            plugin.getServer().addRecipe(crackedStoneBrick());
+        
+        if(plugin.config.NAME_TAG_RECIPE)
+            plugin.getServer().addRecipe(nameTag());
+        
+        if(plugin.config.SADDLE_RECIPE)
+            plugin.getServer().addRecipe(saddle());
+        
+        if(plugin.config.HORSE_ARMOR_RECIPE) {
+            plugin.getServer().addRecipe(horseArmorIron());
+            plugin.getServer().addRecipe(horseArmorGold());
+            plugin.getServer().addRecipe(horseArmorDiamond());
         }
     }
     
@@ -89,11 +104,66 @@ public class CraftRecipes {
     
     ShapedRecipe endPortalFrame() {
         ShapedRecipe endPortalFrame = new ShapedRecipe(new ItemStack(Material.ENDER_PORTAL_FRAME))
-            .shape("aba", "bcb", "aba")
+            .shape("bdb", "aca", "aaa")
             .setIngredient('a', Material.ENDER_STONE)
-            .setIngredient('b', Material.EYE_OF_ENDER)
-            .setIngredient('c', Material.ENDER_PEARL);
+            .setIngredient('b', Material.STAINED_CLAY, 13)
+            .setIngredient('c', Material.OBSIDIAN)
+            .setIngredient('d', Material.AIR);
         return endPortalFrame;
     }
     
+    ShapedRecipe crackedStoneBrick() {
+        ShapedRecipe crackedStoneBrick = new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 8, (short)2))
+            .shape("aaa", "aba", "aaa")
+            .setIngredient('a', Material.SMOOTH_BRICK)
+            .setIngredient('b', Material.SULPHUR);
+        
+        return crackedStoneBrick;
+    }
+    
+    ShapedRecipe nameTag() {
+        ShapedRecipe nameTag = new ShapedRecipe(new ItemStack(Material.NAME_TAG))
+            .shape("abb")
+            .setIngredient('a', Material.IRON_INGOT)
+            .setIngredient('b', Material.PAPER);
+        
+        return nameTag;
+    }
+    
+    ShapedRecipe saddle() {
+        ShapedRecipe saddle = new ShapedRecipe(new ItemStack(Material.SADDLE))
+            .shape("aba", "aaa", "bcb")
+            .setIngredient('a', Material.LEATHER)
+            .setIngredient('b', Material.AIR)
+            .setIngredient('c', Material.IRON_INGOT);
+        
+        return saddle;
+    }
+    
+    ShapedRecipe horseArmorIron() {
+        ShapedRecipe horseArmorIron = new ShapedRecipe(new ItemStack(Material.IRON_BARDING))
+            .shape("bba", "aaa", "aba")
+            .setIngredient('a', Material.IRON_INGOT)
+            .setIngredient('b', Material.AIR);
+        
+        return horseArmorIron;
+    }
+    
+    ShapedRecipe horseArmorGold() {
+        ShapedRecipe horseArmorGold = new ShapedRecipe(new ItemStack(Material.GOLD_BARDING))
+            .shape("bba", "aaa", "aba")
+            .setIngredient('a', Material.GOLD_INGOT)
+            .setIngredient('b', Material.AIR);
+        
+        return horseArmorGold;
+    }
+    
+    ShapedRecipe horseArmorDiamond() {
+        ShapedRecipe horseArmorDiamond = new ShapedRecipe(new ItemStack(Material.DIAMOND_BARDING))
+            .shape("bba", "aaa", "aba")
+            .setIngredient('a', Material.DIAMOND)
+            .setIngredient('b', Material.AIR);
+        
+        return horseArmorDiamond;
+    }
 }

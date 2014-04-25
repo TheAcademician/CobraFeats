@@ -14,6 +14,11 @@ public class Configuration {
     public boolean PERMA_DIRT_RECIPE;
     public boolean PODZOL_RECIPE;
     public boolean MYCELIUM_RECIPE;
+    public boolean END_PORTAL_FRAME_RECIPE;
+    public boolean CRACKED_STONE_BRICK_RECIPE;
+    public boolean NAME_TAG_RECIPE;
+    public boolean SADDLE_RECIPE;
+    public boolean HORSE_ARMOR_RECIPE;
     
     public Configuration(CobraFeats instance) {
         plugin = instance;
@@ -37,6 +42,11 @@ public class Configuration {
         PERMA_DIRT_RECIPE = plugin.getConfig().getBoolean("recipes.perma-dirt", false);
         PODZOL_RECIPE = plugin.getConfig().getBoolean("recipes.podzol", false);
         MYCELIUM_RECIPE = plugin.getConfig().getBoolean("recipes.mycelium", false);
+        END_PORTAL_FRAME_RECIPE = plugin.getConfig().getBoolean("recipes.end-portal-frame", false);
+        CRACKED_STONE_BRICK_RECIPE = plugin.getConfig().getBoolean("recipes.cracked-stone-brick", false);
+        NAME_TAG_RECIPE = plugin.getConfig().getBoolean("recipes.name-tag", false);
+        SADDLE_RECIPE = plugin.getConfig().getBoolean("recipes.saddle", false);
+        HORSE_ARMOR_RECIPE = plugin.getConfig().getBoolean("recipes.horse-armor", false);
     }
     
     public void reload() {
@@ -57,6 +67,11 @@ public class Configuration {
         settings.add(ChatColor.GOLD + " - Perma-Dirt: " + statusCheck(PERMA_DIRT_RECIPE));
         settings.add(ChatColor.GOLD + " - Podzol: " + statusCheck(PODZOL_RECIPE));
         settings.add(ChatColor.GOLD + " - Mycelium: " + statusCheck(MYCELIUM_RECIPE));
+        settings.add(ChatColor.GOLD + " - End Portal Frame: " + statusCheck(END_PORTAL_FRAME_RECIPE));
+        settings.add(ChatColor.GOLD + " - Cracked Stone Brick: " + statusCheck(CRACKED_STONE_BRICK_RECIPE));
+        settings.add(ChatColor.GOLD + " - Name Tag: " + statusCheck(NAME_TAG_RECIPE));
+        settings.add(ChatColor.GOLD + " - Saddle: " + statusCheck(SADDLE_RECIPE));
+        settings.add(ChatColor.GOLD + " - Horse Armor: " + statusCheck(HORSE_ARMOR_RECIPE));
         
         return settings.toArray(new String[settings.size()]);
     }
