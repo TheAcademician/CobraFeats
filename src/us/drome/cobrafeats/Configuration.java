@@ -10,6 +10,7 @@ public class Configuration {
     public boolean SILK_TOUCH_SPAWNERS;
     public boolean AESTHETIC_COMMAND_BLOCKS;
     public boolean RAIN_WATER_BUCKETS;
+    public boolean SELF_POWERED_LAMPS;
     
     public boolean PERMA_DIRT_RECIPE;
     public boolean PODZOL_RECIPE;
@@ -19,6 +20,9 @@ public class Configuration {
     public boolean NAME_TAG_RECIPE;
     public boolean SADDLE_RECIPE;
     public boolean HORSE_ARMOR_RECIPE;
+    public boolean DOUBLE_STONE_SLAB_RECIPE;
+    public boolean DEAD_BUSH_RECIPE;
+    public boolean COBWEB_RECIPE;
     
     public Configuration(CobraFeats instance) {
         plugin = instance;
@@ -37,6 +41,7 @@ public class Configuration {
         SILK_TOUCH_SPAWNERS = plugin.getConfig().getBoolean("silk-touch-spawners", false);
         AESTHETIC_COMMAND_BLOCKS = plugin.getConfig().getBoolean("aesthetic-command-blocks", false);
         RAIN_WATER_BUCKETS = plugin.getConfig().getBoolean("rain-water-buckets", false);
+        SELF_POWERED_LAMPS = plugin.getConfig().getBoolean("self-powered-lamps", false);
         
         //Recipes
         PERMA_DIRT_RECIPE = plugin.getConfig().getBoolean("recipes.perma-dirt", false);
@@ -47,6 +52,9 @@ public class Configuration {
         NAME_TAG_RECIPE = plugin.getConfig().getBoolean("recipes.name-tag", false);
         SADDLE_RECIPE = plugin.getConfig().getBoolean("recipes.saddle", false);
         HORSE_ARMOR_RECIPE = plugin.getConfig().getBoolean("recipes.horse-armor", false);
+        DOUBLE_STONE_SLAB_RECIPE = plugin.getConfig().getBoolean("recipes.double-stone-slab", false);
+        DEAD_BUSH_RECIPE = plugin.getConfig().getBoolean("recipes.dead-bush", false);
+        COBWEB_RECIPE = plugin.getConfig().getBoolean("recipes.cobweb", false);
     }
     
     public void reload() {
@@ -61,6 +69,7 @@ public class Configuration {
         settings.add(ChatColor.GOLD + "Silk Touch Spawners: " + statusCheck(SILK_TOUCH_SPAWNERS));
         settings.add(ChatColor.GOLD + "Aesthetic Command Blocks: " + statusCheck(AESTHETIC_COMMAND_BLOCKS));
         settings.add(ChatColor.GOLD + "Rain Water Buckets: " + statusCheck(RAIN_WATER_BUCKETS));
+        settings.add(ChatColor.GOLD + "Self Powered Lamps: " + statusCheck(SELF_POWERED_LAMPS));
         
         //Recipes
         settings.add(ChatColor.GOLD + "Recipes:");
@@ -72,6 +81,9 @@ public class Configuration {
         settings.add(ChatColor.GOLD + " - Name Tag: " + statusCheck(NAME_TAG_RECIPE));
         settings.add(ChatColor.GOLD + " - Saddle: " + statusCheck(SADDLE_RECIPE));
         settings.add(ChatColor.GOLD + " - Horse Armor: " + statusCheck(HORSE_ARMOR_RECIPE));
+        settings.add(ChatColor.GOLD + " - Double Stone Slab: " + statusCheck(DOUBLE_STONE_SLAB_RECIPE));
+        settings.add(ChatColor.GOLD + " - Dead Bush: " + statusCheck(DEAD_BUSH_RECIPE));
+        settings.add(ChatColor.GOLD + " - Cobweb: " + statusCheck(COBWEB_RECIPE));
         
         return settings.toArray(new String[settings.size()]);
     }

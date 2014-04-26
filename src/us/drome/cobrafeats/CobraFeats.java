@@ -29,6 +29,7 @@ public class CobraFeats extends JavaPlugin {
         (new SilkTouchSpawners(this)).registerEvents();
         (new AestheticCommandBlocks(this)).registerEvents();
         (new RainWaterBuckets(this)).registerEvents();
+        (new SelfPoweredLamps(this)).registerEvents();
         
         recipes.register();
         

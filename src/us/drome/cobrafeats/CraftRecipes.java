@@ -19,6 +19,9 @@ public class CraftRecipes {
         
         if(plugin.config.AESTHETIC_COMMAND_BLOCKS) 
             plugin.getServer().addRecipe(commandBlock());
+        
+        if(plugin.config.SELF_POWERED_LAMPS)
+            plugin.getServer().addRecipe(selfPoweredLamp());
 
         if(plugin.config.PERMA_DIRT_RECIPE) 
             plugin.getServer().addRecipe(permaDirt());
@@ -48,16 +51,35 @@ public class CraftRecipes {
             plugin.getServer().addRecipe(horseArmorGold());
             plugin.getServer().addRecipe(horseArmorDiamond());
         }
+        
+        if(plugin.config.DOUBLE_STONE_SLAB_RECIPE)
+            plugin.getServer().addRecipe(doubleStoneSlab());
+        
+        if(plugin.config.DEAD_BUSH_RECIPE)
+            plugin.getServer().addRecipe(deadBush());
+        
+        if(plugin.config.COBWEB_RECIPE)
+            plugin.getServer().addRecipe(cobweb());
     }
     
     ShapedRecipe commandBlock() {
-        ShapedRecipe commandBlock = new ShapedRecipe(new ItemStack(Material.COMMAND))
+        return new ShapedRecipe(new ItemStack(Material.COMMAND))
             .shape("aba", "bcb", "aba")
             .setIngredient('a', Material.HARD_CLAY)
             .setIngredient('b', Material.REDSTONE)
             .setIngredient('c', Material.IRON_INGOT);
-        
-        return commandBlock;
+    }
+    
+    ShapedRecipe selfPoweredLamp() {
+        ItemStack poweredLamp = new ItemStack(Material.REDSTONE_LAMP_OFF, 8, (short)2);
+        ItemMeta poweredLampMeta = poweredLamp.getItemMeta();
+        poweredLampMeta.setDisplayName("Powered Lamp");
+        poweredLampMeta.setLore(new ArrayList<String>() {{ add("Rumored to be powered by Element 115!"); }});
+        poweredLamp.setItemMeta(poweredLampMeta);
+        return new ShapedRecipe(poweredLamp)
+            .shape("aaa", "aba", "aaa")
+            .setIngredient('a', Material.REDSTONE_LAMP_OFF)
+            .setIngredient('b', Material.REDSTONE_BLOCK);
     }
     
     ShapedRecipe permaDirt() {
@@ -67,103 +89,99 @@ public class CraftRecipes {
         permaDirtMeta.setLore(new ArrayList<String>() {{ add("Prevents grass, weeds, and mushrooms!"); }});
         permaDirtItem.setItemMeta(permaDirtMeta);
         permaDirtItem.setDurability((short)1);
-        ShapedRecipe permaDirt = new ShapedRecipe(permaDirtItem)
+        return new ShapedRecipe(permaDirtItem)
             .shape("aaa")
             .setIngredient('a', Material.DIRT);
-        
-        return permaDirt;
     }
     
     ShapelessRecipe podzol() {
         ItemStack podzolItem = new ItemStack(Material.DIRT);
         podzolItem.setDurability((short)2);
-        ShapelessRecipe podzol = new ShapelessRecipe(podzolItem)
+        return new ShapelessRecipe(podzolItem)
             .addIngredient(Material.DIRT)
             .addIngredient(Material.LEAVES, -1);
-        
-        return podzol;
     }
     
     ShapelessRecipe podzol2() {
         ItemStack podzolItem = new ItemStack(Material.DIRT);
         podzolItem.setDurability((short)2);
-        ShapelessRecipe podzol = new ShapelessRecipe(podzolItem)
+        return new ShapelessRecipe(podzolItem)
             .addIngredient(Material.DIRT)
             .addIngredient(Material.LEAVES_2, -1);
-        
-        return podzol;
     }
     
     ShapelessRecipe mycelium() {
-        ShapelessRecipe mycelium = new ShapelessRecipe(new ItemStack(Material.MYCEL))
+        return new ShapelessRecipe(new ItemStack(Material.MYCEL))
         .addIngredient(Material.DIRT)
         .addIngredient(Material.MUSHROOM_SOUP);
-        
-        return mycelium;
     }
     
     ShapedRecipe endPortalFrame() {
-        ShapedRecipe endPortalFrame = new ShapedRecipe(new ItemStack(Material.ENDER_PORTAL_FRAME))
-            .shape("bdb", "aca", "aaa")
+        return new ShapedRecipe(new ItemStack(Material.ENDER_PORTAL_FRAME))
+            .shape("b b", "aca", "aaa")
             .setIngredient('a', Material.ENDER_STONE)
             .setIngredient('b', Material.STAINED_CLAY, 13)
-            .setIngredient('c', Material.OBSIDIAN)
-            .setIngredient('d', Material.AIR);
-        return endPortalFrame;
+            .setIngredient('c', Material.OBSIDIAN);
     }
     
     ShapedRecipe crackedStoneBrick() {
-        ShapedRecipe crackedStoneBrick = new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 8, (short)2))
+        return new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 8, (short)2))
             .shape("aaa", "aba", "aaa")
             .setIngredient('a', Material.SMOOTH_BRICK)
             .setIngredient('b', Material.SULPHUR);
-        
-        return crackedStoneBrick;
     }
     
     ShapedRecipe nameTag() {
-        ShapedRecipe nameTag = new ShapedRecipe(new ItemStack(Material.NAME_TAG))
+        return new ShapedRecipe(new ItemStack(Material.NAME_TAG))
             .shape("abb")
             .setIngredient('a', Material.IRON_INGOT)
             .setIngredient('b', Material.PAPER);
-        
-        return nameTag;
     }
     
     ShapedRecipe saddle() {
-        ShapedRecipe saddle = new ShapedRecipe(new ItemStack(Material.SADDLE))
-            .shape("aba", "aaa", "bcb")
+        return new ShapedRecipe(new ItemStack(Material.SADDLE))
+            .shape("a a", "aaa", " b ")
             .setIngredient('a', Material.LEATHER)
-            .setIngredient('b', Material.AIR)
-            .setIngredient('c', Material.IRON_INGOT);
-        
-        return saddle;
+            .setIngredient('b', Material.IRON_INGOT);
     }
     
     ShapedRecipe horseArmorIron() {
-        ShapedRecipe horseArmorIron = new ShapedRecipe(new ItemStack(Material.IRON_BARDING))
-            .shape("bba", "aaa", "aba")
-            .setIngredient('a', Material.IRON_INGOT)
-            .setIngredient('b', Material.AIR);
-        
-        return horseArmorIron;
+        return new ShapedRecipe(new ItemStack(Material.IRON_BARDING))
+            .shape("  a", "aba")
+            .setIngredient('a', Material.IRON_BLOCK)
+            .setIngredient('b', Material.LEATHER);
     }
     
     ShapedRecipe horseArmorGold() {
-        ShapedRecipe horseArmorGold = new ShapedRecipe(new ItemStack(Material.GOLD_BARDING))
-            .shape("bba", "aaa", "aba")
-            .setIngredient('a', Material.GOLD_INGOT)
-            .setIngredient('b', Material.AIR);
-        
-        return horseArmorGold;
+        return new ShapedRecipe(new ItemStack(Material.GOLD_BARDING))
+            .shape("  a", "aba")
+            .setIngredient('a', Material.GOLD_BLOCK)
+            .setIngredient('b', Material.LEATHER);
     }
     
     ShapedRecipe horseArmorDiamond() {
-        ShapedRecipe horseArmorDiamond = new ShapedRecipe(new ItemStack(Material.DIAMOND_BARDING))
-            .shape("bba", "aaa", "aba")
-            .setIngredient('a', Material.DIAMOND)
-            .setIngredient('b', Material.AIR);
-        
-        return horseArmorDiamond;
+        return new ShapedRecipe(new ItemStack(Material.DIAMOND_BARDING))
+            .shape("  a", "aba")
+            .setIngredient('a', Material.DIAMOND_BLOCK)
+            .setIngredient('b', Material.LEATHER);
+    }
+    
+    ShapedRecipe doubleStoneSlab() {
+        return new ShapedRecipe(new ItemStack(Material.DOUBLE_STEP))
+            .shape("a", "a")
+            .setIngredient('a', Material.STEP);
+    }
+    
+    ShapelessRecipe deadBush() {
+        return new ShapelessRecipe(new ItemStack(Material.DEAD_BUSH))
+            .addIngredient(Material.SAPLING)
+            .addIngredient(Material.BLAZE_POWDER);
+    }
+    
+    ShapedRecipe cobweb() {
+        return new ShapedRecipe(new ItemStack(Material.WEB))
+            .shape("aaa", "aba", "aaa")
+            .setIngredient('a', Material.STRING)
+            .setIngredient('b', Material.SLIME_BALL);
     }
 }

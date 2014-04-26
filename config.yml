@@ -1,6 +1,7 @@
 silk-touch-spawners: false
 aesthetic-command-blocks: false
 rain-water-buckets: false
+self-powered-lamps: false
 recipes:
   perma-dirt: false
   podzol: false
@@ -10,3 +11,6 @@ recipes:
   name-tag: false
   saddle: false
   horse-armor: false
+  double-stone-slab: false
+  dead-bush: false
+  cobweb: false
