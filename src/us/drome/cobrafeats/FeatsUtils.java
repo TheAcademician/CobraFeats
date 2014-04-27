@@ -6,21 +6,47 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 public class FeatsUtils {
-        public boolean isPickaxe(ItemStack tool) {
-        Material toolType = tool.getType();
-        if(toolType.equals(Material.WOOD_PICKAXE) || toolType.equals(Material.STONE_PICKAXE) || toolType.equals(Material.IRON_PICKAXE) ||
-                toolType.equals(Material.GOLD_PICKAXE) || toolType.equals(Material.DIAMOND_PICKAXE)) {
-            return true;
+    enum tools { IRON_SPADE, IRON_PICKAXE, IRON_AXE, IRON_HOE,
+        WOOD_SPADE, WOOD_PICKAXE, WOOD_AXE, WOOD_HOE,
+        STONE_SPADE, STONE_PICKAXE, STONE_AXE, STONE_HOE,
+        DIAMOND_SPADE, DIAMOND_PICKAXE, DIAMOND_AXE, DIAMOND_HOE,
+        GOLD_SPACE, GOLD_PICKAXE, GOLD_AXE, GOLD_HOE, SHEARS };
+    
+    enum spades { IRON_SPADE, WOOD_SPADE, STONE_SPADE, DIAMOND_SPADE, GOLD_SPADE };
+    
+    enum pickaxes { IRON_PICKAXE, WOOD_PICKAXE, STONE_PICKAXE, DIAMOND_PICKAXE, GOLD_PICKAXE };
+    
+    enum axes { IRON_AXE, WOOD_AXE, STONE_AXE, DIAMOND_AXE, GOLD_AXE };
+    
+    enum hoes { IRON_HOE, WOOD_HOE, STONE_HOE, DIAMOND_HOE, GOLD_HOE };
+    
+    public static boolean isPickaxe(ItemStack tool) {
+        for(pickaxes pickType : pickaxes.values()) {
+            if(pickType.name().equals(tool.getType().name())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean isTool(ItemStack tool) {
+        for(tools toolType : tools.values()) {
+            if(toolType.name().equals(tool.getType().name())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean isSilkTouch(ItemStack tool) {
+        if(isTool(tool)) {
+            return (tool.containsEnchantment(Enchantment.SILK_TOUCH) ? true : false);
         } else {
             return false;
         }
     }
     
-    public boolean isSilkTouch(ItemStack tool) {
-        return (tool.getEnchantments().containsKey(Enchantment.SILK_TOUCH) ? true : false);
-    }
-    
-    public boolean isRaining(Location location) {
+    public static boolean isRaining(Location location) {
         double blockTemp = location.getBlock().getTemperature();
         
         if(location.getWorld().hasStorm()) {
@@ -36,7 +62,7 @@ public class FeatsUtils {
         return false;
     }
     
-    public boolean isSnowing(Location location) {
+    public static boolean isSnowing(Location location) {
         double blockTemp = location.getBlock().getTemperature();
         
         if(location.getWorld().hasStorm()) {
@@ -52,7 +78,7 @@ public class FeatsUtils {
         return false;
     }
     
-    public boolean isOutside(Location location) {
+    public static boolean isOutside(Location location) {
         if(location.getWorld().getHighestBlockYAt(location) < location.getBlockY()) {
             return true;
         } else {

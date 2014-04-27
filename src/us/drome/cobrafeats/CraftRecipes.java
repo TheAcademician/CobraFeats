@@ -71,7 +71,7 @@ public class CraftRecipes {
     }
     
     ShapedRecipe selfPoweredLamp() {
-        ItemStack poweredLamp = new ItemStack(Material.REDSTONE_LAMP_OFF, 8, (short)2);
+        ItemStack poweredLamp = new ItemStack(Material.REDSTONE_LAMP_OFF, 8);
         ItemMeta poweredLampMeta = poweredLamp.getItemMeta();
         poweredLampMeta.setDisplayName("Powered Lamp");
         poweredLampMeta.setLore(new ArrayList<String>() {{ add("Rumored to be powered by Element 115!"); }});
