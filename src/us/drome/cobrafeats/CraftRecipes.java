@@ -55,6 +55,9 @@ public class CraftRecipes {
         if(plugin.config.DOUBLE_STONE_SLAB_RECIPE)
             plugin.getServer().addRecipe(doubleStoneSlab());
         
+        if(plugin.config.FULL_STONE_SLAB_RECIPE)
+            plugin.getServer().addRecipe(fullStoneSlab());
+        
         if(plugin.config.DEAD_BUSH_RECIPE)
             plugin.getServer().addRecipe(deadBush());
         
@@ -169,6 +172,12 @@ public class CraftRecipes {
     ShapedRecipe doubleStoneSlab() {
         return new ShapedRecipe(new ItemStack(Material.DOUBLE_STEP))
             .shape("a", "a")
+            .setIngredient('a', Material.STEP);
+    }
+    
+    ShapedRecipe fullStoneSlab() {
+        return new ShapedRecipe(new ItemStack(Material.DOUBLE_STEP, 2, (short)8))
+            .shape("aa", "aa")
             .setIngredient('a', Material.STEP);
     }
     

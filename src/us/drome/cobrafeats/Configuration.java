@@ -21,6 +21,7 @@ public class Configuration {
     public boolean SADDLE_RECIPE;
     public boolean HORSE_ARMOR_RECIPE;
     public boolean DOUBLE_STONE_SLAB_RECIPE;
+    public boolean FULL_STONE_SLAB_RECIPE;
     public boolean DEAD_BUSH_RECIPE;
     public boolean COBWEB_RECIPE;
     
@@ -53,6 +54,7 @@ public class Configuration {
         SADDLE_RECIPE = plugin.getConfig().getBoolean("recipes.saddle", false);
         HORSE_ARMOR_RECIPE = plugin.getConfig().getBoolean("recipes.horse-armor", false);
         DOUBLE_STONE_SLAB_RECIPE = plugin.getConfig().getBoolean("recipes.double-stone-slab", false);
+        FULL_STONE_SLAB_RECIPE = plugin.getConfig().getBoolean("recipes.full-stone-slab", false);
         DEAD_BUSH_RECIPE = plugin.getConfig().getBoolean("recipes.dead-bush", false);
         COBWEB_RECIPE = plugin.getConfig().getBoolean("recipes.cobweb", false);
     }
@@ -82,6 +84,7 @@ public class Configuration {
         settings.add(ChatColor.GOLD + " - Saddle: " + statusCheck(SADDLE_RECIPE));
         settings.add(ChatColor.GOLD + " - Horse Armor: " + statusCheck(HORSE_ARMOR_RECIPE));
         settings.add(ChatColor.GOLD + " - Double Stone Slab: " + statusCheck(DOUBLE_STONE_SLAB_RECIPE));
+        settings.add(ChatColor.GOLD + " - Full Stone Slab: " + statusCheck(FULL_STONE_SLAB_RECIPE));
         settings.add(ChatColor.GOLD + " - Dead Bush: " + statusCheck(DEAD_BUSH_RECIPE));
         settings.add(ChatColor.GOLD + " - Cobweb: " + statusCheck(COBWEB_RECIPE));
         

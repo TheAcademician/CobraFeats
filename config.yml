@@ -12,5 +12,6 @@ recipes:
   saddle: false
   horse-armor: false
   double-stone-slab: false
+  full-stone-slab: false
   dead-bush: false
   cobweb: false
