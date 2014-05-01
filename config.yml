@@ -2,6 +2,7 @@ silk-touch-spawners: false
 aesthetic-command-blocks: false
 rain-water-buckets: false
 self-powered-lamps: false
+bone-meal-ferns: false
 recipes:
   perma-dirt: false
   podzol: false

@@ -11,6 +11,7 @@ public class Configuration {
     public boolean AESTHETIC_COMMAND_BLOCKS;
     public boolean RAIN_WATER_BUCKETS;
     public boolean SELF_POWERED_LAMPS;
+    public boolean BONE_MEAL_FERNS;
     
     public boolean PERMA_DIRT_RECIPE;
     public boolean PODZOL_RECIPE;
@@ -43,6 +44,7 @@ public class Configuration {
         AESTHETIC_COMMAND_BLOCKS = plugin.getConfig().getBoolean("aesthetic-command-blocks", false);
         RAIN_WATER_BUCKETS = plugin.getConfig().getBoolean("rain-water-buckets", false);
         SELF_POWERED_LAMPS = plugin.getConfig().getBoolean("self-powered-lamps", false);
+        BONE_MEAL_FERNS = plugin.getConfig().getBoolean("bone-meal-ferns", false);
         
         //Recipes
         PERMA_DIRT_RECIPE = plugin.getConfig().getBoolean("recipes.perma-dirt", false);
@@ -72,6 +74,7 @@ public class Configuration {
         settings.add(ChatColor.GOLD + "Aesthetic Command Blocks: " + statusCheck(AESTHETIC_COMMAND_BLOCKS));
         settings.add(ChatColor.GOLD + "Rain Water Buckets: " + statusCheck(RAIN_WATER_BUCKETS));
         settings.add(ChatColor.GOLD + "Self Powered Lamps: " + statusCheck(SELF_POWERED_LAMPS));
+        settings.add(ChatColor.GOLD + "Bone Meal Ferns: " + statusCheck(BONE_MEAL_FERNS));
         
         //Recipes
         settings.add(ChatColor.GOLD + "Recipes:");
