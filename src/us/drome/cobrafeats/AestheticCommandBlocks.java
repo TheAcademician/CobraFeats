@@ -14,7 +14,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class AestheticCommandBlocks implements Listener{
     CobraFeats plugin;
-    FeatsUtils utils;
     
     ArrayList<Location> locations = new ArrayList<>();
     

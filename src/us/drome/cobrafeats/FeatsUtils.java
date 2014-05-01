@@ -1,6 +1,7 @@
 package us.drome.cobrafeats;
 
 import org.bukkit.Location;
+import org.bukkit.block.Biome;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
@@ -83,5 +84,13 @@ public class FeatsUtils {
         } else {
             return false;
         }
+    }
+    
+    public static boolean biomeMatcher(String toMatch) {
+        for(Biome biome : Biome.values()) {
+            if(biome.name().contains(toMatch.toUpperCase()))
+                return true;
+        }
+        return false;
     }
 }

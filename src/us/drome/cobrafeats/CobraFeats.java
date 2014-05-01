@@ -30,6 +30,7 @@ public class CobraFeats extends JavaPlugin {
         (new AestheticCommandBlocks(this)).registerEvents();
         (new RainWaterBuckets(this)).registerEvents();
         (new SelfPoweredLamps(this)).registerEvents();
+        (new BoneMealFerns(this)).registerEvents();
         
         recipes.register();
         
