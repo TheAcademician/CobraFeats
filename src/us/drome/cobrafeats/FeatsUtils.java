@@ -1,7 +1,11 @@
 package us.drome.cobrafeats;
 
+import java.util.ArrayList;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
@@ -92,5 +96,22 @@ public class FeatsUtils {
                 return true;
         }
         return false;
+    }
+    
+    public static boolean isBlockAdjacent(Block origin, Material toCheck, byte durability, int count) {
+        ArrayList<Block> adjacents = new ArrayList<>();
+        adjacents.add(origin.getRelative(BlockFace.NORTH));
+        adjacents.add(origin.getRelative(BlockFace.SOUTH));
+        adjacents.add(origin.getRelative(BlockFace.EAST));
+        adjacents.add(origin.getRelative(BlockFace.WEST));
+        
+        int matches = 0;
+        
+        for(Block block : adjacents) {
+            if(block.getType().equals(toCheck) && block.getData() == durability)
+                matches++;
+        }
+        
+        return (matches >= count ? true : false);
     }
 }
