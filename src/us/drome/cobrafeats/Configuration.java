@@ -12,6 +12,7 @@ public class Configuration {
     public boolean RAIN_WATER_BUCKETS;
     public boolean SELF_POWERED_LAMPS;
     public boolean BONE_MEAL_FERNS;
+    public boolean INFINITE_LAVA_SOURCES;
     
     public boolean PERMA_DIRT_RECIPE;
     public boolean PODZOL_RECIPE;
@@ -25,6 +26,9 @@ public class Configuration {
     public boolean FULL_STONE_SLAB_RECIPE;
     public boolean DEAD_BUSH_RECIPE;
     public boolean COBWEB_RECIPE;
+    public boolean BLEACH_WOOL_RECIPE;
+    public boolean BLEACH_CLAY_RECIPE;
+    public boolean BLEACH_GLASS_RECIPE;
     
     public Configuration(CobraFeats instance) {
         plugin = instance;
@@ -45,6 +49,7 @@ public class Configuration {
         RAIN_WATER_BUCKETS = plugin.getConfig().getBoolean("rain-water-buckets", false);
         SELF_POWERED_LAMPS = plugin.getConfig().getBoolean("self-powered-lamps", false);
         BONE_MEAL_FERNS = plugin.getConfig().getBoolean("bone-meal-ferns", false);
+        INFINITE_LAVA_SOURCES = plugin.getConfig().getBoolean("infinite-lava-sourves", false);
         
         //Recipes
         PERMA_DIRT_RECIPE = plugin.getConfig().getBoolean("recipes.perma-dirt", false);
@@ -59,6 +64,9 @@ public class Configuration {
         FULL_STONE_SLAB_RECIPE = plugin.getConfig().getBoolean("recipes.full-stone-slab", false);
         DEAD_BUSH_RECIPE = plugin.getConfig().getBoolean("recipes.dead-bush", false);
         COBWEB_RECIPE = plugin.getConfig().getBoolean("recipes.cobweb", false);
+        BLEACH_WOOL_RECIPE = plugin.getConfig().getBoolean("recipes.bleach-wool", false);
+        BLEACH_CLAY_RECIPE = plugin.getConfig().getBoolean("recipes.bleach-clay", false);
+        BLEACH_GLASS_RECIPE = plugin.getConfig().getBoolean("recipes.bleach-glass", false);
     }
     
     public void reload() {
@@ -75,6 +83,7 @@ public class Configuration {
         settings.add(ChatColor.GOLD + "Rain Water Buckets: " + statusCheck(RAIN_WATER_BUCKETS));
         settings.add(ChatColor.GOLD + "Self Powered Lamps: " + statusCheck(SELF_POWERED_LAMPS));
         settings.add(ChatColor.GOLD + "Bone Meal Ferns: " + statusCheck(BONE_MEAL_FERNS));
+        settings.add(ChatColor.GOLD + "Infinite Lava Sources: " + statusCheck(INFINITE_LAVA_SOURCES));
         
         //Recipes
         settings.add(ChatColor.GOLD + "Recipes:");
@@ -90,6 +99,9 @@ public class Configuration {
         settings.add(ChatColor.GOLD + " - Full Stone Slab: " + statusCheck(FULL_STONE_SLAB_RECIPE));
         settings.add(ChatColor.GOLD + " - Dead Bush: " + statusCheck(DEAD_BUSH_RECIPE));
         settings.add(ChatColor.GOLD + " - Cobweb: " + statusCheck(COBWEB_RECIPE));
+        settings.add(ChatColor.GOLD + " - Bleach Wool: " + statusCheck(BLEACH_WOOL_RECIPE));
+        settings.add(ChatColor.GOLD + " - Bleach Clay: " + statusCheck(BLEACH_CLAY_RECIPE));
+        settings.add(ChatColor.GOLD + " - Bleach Glass: " + statusCheck(BLEACH_GLASS_RECIPE));
         
         return settings.toArray(new String[settings.size()]);
     }

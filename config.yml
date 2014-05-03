@@ -3,6 +3,7 @@ aesthetic-command-blocks: false
 rain-water-buckets: false
 self-powered-lamps: false
 bone-meal-ferns: false
+infinite-lava-sources: false
 recipes:
   perma-dirt: false
   podzol: false
@@ -16,3 +17,6 @@ recipes:
   full-stone-slab: false
   dead-bush: false
   cobweb: false
+  bleach-wool: false
+  bleach-clay: false
+  bleach-glass: false

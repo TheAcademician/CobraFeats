@@ -2,6 +2,7 @@ package us.drome.cobrafeats;
 
 import java.util.ArrayList;
 import org.bukkit.Material;
+import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
@@ -63,6 +64,16 @@ public class CraftRecipes {
         
         if(plugin.config.COBWEB_RECIPE)
             plugin.getServer().addRecipe(cobweb());
+        
+        if(plugin.config.BLEACH_WOOL_RECIPE)
+            plugin.getServer().addRecipe(bleachWool());
+        
+        if(plugin.config.BLEACH_CLAY_RECIPE)
+            plugin.getServer().addRecipe(bleachClay());
+        
+        if(plugin.config.BLEACH_GLASS_RECIPE)
+            plugin.getServer().addRecipe(bleachGlass());
+        
     }
     
     ShapedRecipe commandBlock() {
@@ -192,5 +203,19 @@ public class CraftRecipes {
             .shape("aaa", "aba", "aaa")
             .setIngredient('a', Material.STRING)
             .setIngredient('b', Material.SLIME_BALL);
+    }
+    
+    ShapelessRecipe bleachWool() {
+        return new ShapelessRecipe(new ItemStack(Material.WOOL))
+            .addIngredient(Material.WOOL, -1)
+            .addIngredient(Material.INK_SACK, 15);
+    }
+    
+    FurnaceRecipe bleachClay() {
+        return new FurnaceRecipe(new ItemStack(Material.HARD_CLAY), Material.STAINED_CLAY, -1);
+    }
+
+    FurnaceRecipe bleachGlass() {
+        return new FurnaceRecipe(new ItemStack(Material.GLASS), Material.STAINED_GLASS, -1);
     }
 }

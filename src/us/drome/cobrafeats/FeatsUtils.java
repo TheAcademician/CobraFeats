@@ -99,18 +99,12 @@ public class FeatsUtils {
     }
     
     public static boolean isBlockAdjacent(Block origin, Material toCheck, byte durability, int count) {
-        ArrayList<Block> adjacents = new ArrayList<>();
-        adjacents.add(origin.getRelative(BlockFace.NORTH));
-        adjacents.add(origin.getRelative(BlockFace.SOUTH));
-        adjacents.add(origin.getRelative(BlockFace.EAST));
-        adjacents.add(origin.getRelative(BlockFace.WEST));
-        
         int matches = 0;
         
-        for(Block block : adjacents) {
-            if(block.getType().equals(toCheck) && block.getData() == durability)
-                matches++;
-        }
+        matches += (origin.getRelative(BlockFace.NORTH).getType().equals(toCheck) && origin.getRelative(BlockFace.NORTH).getData() == durability ? 1 : 0);
+        matches += (origin.getRelative(BlockFace.SOUTH).getType().equals(toCheck) && origin.getRelative(BlockFace.SOUTH).getData() == durability ? 1 : 0);
+        matches += (origin.getRelative(BlockFace.EAST).getType().equals(toCheck) && origin.getRelative(BlockFace.EAST).getData() == durability ? 1 : 0);
+        matches += (origin.getRelative(BlockFace.WEST).getType().equals(toCheck) && origin.getRelative(BlockFace.WEST).getData() == durability ? 1 : 0);
         
         return (matches >= count ? true : false);
     }
