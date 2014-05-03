@@ -49,7 +49,7 @@ public class Configuration {
         RAIN_WATER_BUCKETS = plugin.getConfig().getBoolean("rain-water-buckets", false);
         SELF_POWERED_LAMPS = plugin.getConfig().getBoolean("self-powered-lamps", false);
         BONE_MEAL_FERNS = plugin.getConfig().getBoolean("bone-meal-ferns", false);
-        INFINITE_LAVA_SOURCES = plugin.getConfig().getBoolean("infinite-lava-sourves", false);
+        INFINITE_LAVA_SOURCES = plugin.getConfig().getBoolean("infinite-lava-sources", false);
         
         //Recipes
         PERMA_DIRT_RECIPE = plugin.getConfig().getBoolean("recipes.perma-dirt", false);
