@@ -13,6 +13,7 @@ public class Configuration {
     public boolean SELF_POWERED_LAMPS;
     public boolean BONE_MEAL_FERNS;
     public boolean INFINITE_LAVA_SOURCES;
+    public boolean AMBIENT_HOPPER_BRAZIERS;
     
     public boolean PERMA_DIRT_RECIPE;
     public boolean PODZOL_RECIPE;
@@ -50,6 +51,7 @@ public class Configuration {
         SELF_POWERED_LAMPS = plugin.getConfig().getBoolean("self-powered-lamps", false);
         BONE_MEAL_FERNS = plugin.getConfig().getBoolean("bone-meal-ferns", false);
         INFINITE_LAVA_SOURCES = plugin.getConfig().getBoolean("infinite-lava-sources", false);
+        AMBIENT_HOPPER_BRAZIERS = plugin.getConfig().getBoolean("ambient-hopper-braziers", false);
         
         //Recipes
         PERMA_DIRT_RECIPE = plugin.getConfig().getBoolean("recipes.perma-dirt", false);
@@ -84,6 +86,7 @@ public class Configuration {
         settings.add(ChatColor.GOLD + "Self Powered Lamps: " + statusCheck(SELF_POWERED_LAMPS));
         settings.add(ChatColor.GOLD + "Bone Meal Ferns: " + statusCheck(BONE_MEAL_FERNS));
         settings.add(ChatColor.GOLD + "Infinite Lava Sources: " + statusCheck(INFINITE_LAVA_SOURCES));
+        settings.add(ChatColor.GOLD + "Ambient Hooper Braziers: " + statusCheck(AMBIENT_HOPPER_BRAZIERS));
         
         //Recipes
         settings.add(ChatColor.GOLD + "Recipes:");

@@ -32,6 +32,7 @@ public class CobraFeats extends JavaPlugin {
         (new SelfPoweredLamps(this)).registerEvents();
         (new BoneMealFerns(this)).registerEvents();
         (new InfiniteLavaSources(this)).registerEvents();
+        (new AmbientHopperBraziers(this)).registerEvents();
         
         recipes.register();
         

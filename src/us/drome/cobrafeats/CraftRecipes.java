@@ -23,6 +23,10 @@ public class CraftRecipes {
         
         if(plugin.config.SELF_POWERED_LAMPS)
             plugin.getServer().addRecipe(selfPoweredLamp());
+        
+        if(plugin.config.AMBIENT_HOPPER_BRAZIERS) {
+            plugin.getServer().addRecipe(hopperBrazier());
+        }
 
         if(plugin.config.PERMA_DIRT_RECIPE) 
             plugin.getServer().addRecipe(permaDirt());
@@ -94,6 +98,17 @@ public class CraftRecipes {
             .shape("aaa", "aba", "aaa")
             .setIngredient('a', Material.REDSTONE_LAMP_OFF)
             .setIngredient('b', Material.REDSTONE_BLOCK);
+    }
+    
+    ShapelessRecipe hopperBrazier() {
+        ItemStack hopperBrazier = new ItemStack(Material.HOPPER);
+        ItemMeta hopperBrazierMeta = hopperBrazier.getItemMeta();
+        hopperBrazierMeta.setDisplayName("Hopper Brazier");
+        hopperBrazierMeta.setLore(new ArrayList<String>() {{ add("Now with Ambience 2.0!"); }});
+        hopperBrazier.setItemMeta(hopperBrazierMeta);
+        return new ShapelessRecipe(hopperBrazier)
+            .addIngredient(Material.HOPPER)
+            .addIngredient(Material.FIREWORK_CHARGE);
     }
     
     ShapedRecipe permaDirt() {
@@ -211,11 +226,17 @@ public class CraftRecipes {
             .addIngredient(Material.INK_SACK, 15);
     }
     
-    FurnaceRecipe bleachClay() {
-        return new FurnaceRecipe(new ItemStack(Material.HARD_CLAY), Material.STAINED_CLAY, -1);
+    ShapedRecipe bleachClay() {
+        return new ShapedRecipe(new ItemStack(Material.HARD_CLAY, 8))
+            .shape("aaa", "aba", "aaa")
+            .setIngredient('a', Material.STAINED_CLAY, -1)
+            .setIngredient('b', Material.WATER_BUCKET);
     }
 
-    FurnaceRecipe bleachGlass() {
-        return new FurnaceRecipe(new ItemStack(Material.GLASS), Material.STAINED_GLASS, -1);
+    ShapedRecipe bleachGlass() {
+        return new ShapedRecipe(new ItemStack(Material.GLASS, 8))
+            .shape("aaa", "aba", "aaa")
+            .setIngredient('a', Material.STAINED_GLASS, -1)
+            .setIngredient('b', Material.WATER_BUCKET);
     }
 }
