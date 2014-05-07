@@ -108,7 +108,7 @@ public class CraftRecipes {
         hopperBrazier.setItemMeta(hopperBrazierMeta);
         return new ShapelessRecipe(hopperBrazier)
             .addIngredient(Material.HOPPER)
-            .addIngredient(Material.FIREWORK_CHARGE);
+            .addIngredient(Material.FIREBALL);
     }
     
     ShapedRecipe permaDirt() {
