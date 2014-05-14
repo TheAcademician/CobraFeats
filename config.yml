@@ -4,7 +4,7 @@ rain-water-buckets: false
 self-powered-lamps: false
 bone-meal-ferns: false
 infinite-lava-sources: false
-hopper-cauldron-braziers: false
+ambient-hopper-braziers: false
 recipes:
   perma-dirt: false
   podzol: false

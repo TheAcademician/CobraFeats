@@ -6,60 +6,58 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.Hopper;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockFadeEvent;
+import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.block.BlockRedstoneEvent;
+import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scheduler.BukkitTask;
 
 public class AmbientHopperBraziers implements Listener {
     CobraFeats plugin;
     FeatsUtils utils;
     ArrayList<Location> locations = new ArrayList<>();
+    ItemStack identifier;
     
     public AmbientHopperBraziers(CobraFeats plugin) {
         this.plugin = plugin;
+        identifier = new ItemStack(Material.FIREBALL);
+        ItemMeta idmeta = identifier.getItemMeta();
+        idmeta.setLore(new ArrayList<String>() {{ add("isBrazier"); }});
+        identifier.setItemMeta(idmeta);
     }
         
     public void registerEvents() {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
     
-    @EventHandler (priority = EventPriority.HIGHEST)
-    public void onRedstoneUpdate(BlockRedstoneEvent event) {
-        if(plugin.config.AMBIENT_HOPPER_BRAZIERS) {
-            final Block block = event.getBlock();
-            plugin.getLogger().info("here : " + block.getData());
-//            if(block.getType().equals(Material.HOPPER) && block.getData() == (byte)7) {
-//                if(event.getNewCurrent() > 1) {
-//                    event.setNewCurrent(1);
-//                    plugin.getLogger().info("current");
-//                    if(block.getRelative(BlockFace.UP).getType().equals(Material.FIRE)) {
-//                        block.getRelative(BlockFace.UP).setType(Material.AIR);
-//                        plugin.getLogger().info("off");
-//                    }
-//                } else {
-//                    plugin.getLogger().info("no current");
-//                    event.setNewCurrent(1);
-//                    if(block.getRelative(BlockFace.UP).getType().equals(Material.AIR)) {
-//                        block.getRelative(BlockFace.UP).setType(Material.FIRE);
-//                        plugin.getLogger().info("on");
-//                    }
-//                }
-//                BukkitTask setDataTask = plugin.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        block.setData((byte)7);
-//                    }
-//                }, 0L, 1L);
-//            }
+    @EventHandler
+    public void onItemMove(InventoryMoveItemEvent event) {
+        if(event.getItem().equals(identifier) || event.getDestination().contains(identifier)) {
+            event.setCancelled(true);
+        }
+    }
+    
+    @EventHandler
+    public void onBlockUpdate(BlockPhysicsEvent event) {
+        Block block = event.getBlock();
+        if(plugin.config.AMBIENT_HOPPER_BRAZIERS && block.getType().equals(Material.HOPPER) && ((Hopper)block.getState()).getInventory().contains(identifier)) {
+            if(block.isBlockPowered() || block.isBlockIndirectlyPowered()) {
+                if(block.getRelative(BlockFace.UP).getType().equals(Material.FIRE)) {
+                    block.getRelative(BlockFace.UP).setType(Material.AIR);
+                }
+            } else {
+                if(block.getRelative(BlockFace.UP).getType().equals(Material.AIR)) {
+                    block.getRelative(BlockFace.UP).setType(Material.FIRE);
+                }
+            }
         }
     }
     
@@ -68,8 +66,8 @@ public class AmbientHopperBraziers implements Listener {
         Block block = event.getBlock();
         if(plugin.config.AMBIENT_HOPPER_BRAZIERS && block.getType().equals(Material.FIRE)) {
             Block relative = block.getRelative(BlockFace.DOWN);
-            if(relative.getType().equals(Material.HOPPER) && relative.getData() == (byte)7) {
-                if(relative.getBlockPower() <= 1)
+            if(relative.getType().equals(Material.HOPPER) && ((Hopper)relative.getState()).getInventory().contains(identifier)) {
+                if(!relative.isBlockPowered())
                     event.setCancelled(true);
             }
         }
@@ -86,11 +84,12 @@ public class AmbientHopperBraziers implements Listener {
 
             if(item.getType().equals(Material.HOPPER) && item.hasItemMeta() && item.getItemMeta().getLore().contains("Now with Ambience 2.0!")) {
                 block.setType(Material.HOPPER);
-                block.setData((byte)7);
+                Hopper state = (Hopper)block.getState();
+                state.getInventory().addItem(identifier);
+                state.update();
                 if(block.getRelative(BlockFace.UP).getType().equals(Material.AIR)) {
                     block.getRelative(BlockFace.UP).setType(Material.FIRE);
                 }
-                //plugin.getServer().getPluginManager().callEvent(new BlockRedstoneEvent(block, 0, 1));
             }
         }
     }
@@ -99,12 +98,8 @@ public class AmbientHopperBraziers implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
         
-        if(event.hasItem() && event.getItem().getType().equals(Material.STICK)) {
-            event.getPlayer().sendMessage("Data: " + event.getClickedBlock().getData());
-        }
-        
         if(plugin.config.AMBIENT_HOPPER_BRAZIERS && event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-            if(block.getType().equals(Material.HOPPER) && block.getData() == (byte)7) {
+            if(block.getType().equals(Material.HOPPER) && ((Hopper)block.getState()).getInventory().contains(identifier)) {
                 event.setCancelled(true);
             }
         }
@@ -119,7 +114,7 @@ public class AmbientHopperBraziers implements Listener {
             Block block = event.getBlock();
             ItemStack tool = event.getPlayer().getItemInHand();
             
-            if(block.getType().equals(Material.HOPPER) && utils.isSilkTouch(tool) && block.getData() == (byte)7) {
+            if(block.getType().equals(Material.HOPPER) && utils.isSilkTouch(tool) && ((Hopper)block.getState()).getInventory().contains(identifier)) {
                 if(locations.contains(block.getLocation())) {
                     locations.remove(block.getLocation());
                 } else {
@@ -135,5 +130,11 @@ public class AmbientHopperBraziers implements Listener {
                 }
             }
         }
+    }
+    
+    @EventHandler
+    public void onItemSpawn(ItemSpawnEvent event) {
+        if(event.getEntity().getItemStack().equals(identifier))
+            event.setCancelled(true);
     }
 }
