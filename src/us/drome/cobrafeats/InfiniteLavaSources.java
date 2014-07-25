@@ -22,9 +22,12 @@ public class InfiniteLavaSources implements Listener {
     @EventHandler
     public void onLavaFlow(BlockFromToEvent event) {
         Block block = event.getBlock();
-        if(block.getType().equals(Material.STATIONARY_LAVA) || block.getType().equals(Material.LAVA) && block.getData() == (byte)0) {
+        if(plugin.config.INFINITE_LAVA_SOURCES && block.getType().equals(Material.STATIONARY_LAVA) || block.getType().equals(Material.LAVA) && block.getData() == (byte)0) {
             Block flowedTo = event.getToBlock();
             Block belowFlow = flowedTo.getRelative(BlockFace.DOWN);
+            if((!flowedTo.getType().equals(Material.AIR) && (!flowedTo.getType().equals(Material.LAVA))) && (!flowedTo.getType().equals(Material.STATIONARY_LAVA))) {
+                return;
+            }
             if(belowFlow.getType().equals(Material.AIR) || (belowFlow.getType().equals(Material.LAVA) ||
                 belowFlow.getType().equals(Material.STATIONARY_LAVA) && belowFlow.getData() != (byte)0)) {
                 return;
