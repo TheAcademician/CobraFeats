@@ -86,7 +86,7 @@ public class Configuration {
         settings.add(ChatColor.GOLD + "Self Powered Lamps: " + statusCheck(SELF_POWERED_LAMPS));
         settings.add(ChatColor.GOLD + "Bone Meal Ferns: " + statusCheck(BONE_MEAL_FERNS));
         settings.add(ChatColor.GOLD + "Infinite Lava Sources: " + statusCheck(INFINITE_LAVA_SOURCES));
-        settings.add(ChatColor.GOLD + "Ambient Hooper Braziers: " + statusCheck(AMBIENT_HOPPER_BRAZIERS));
+        settings.add(ChatColor.GOLD + "Ambient Hopper Braziers: " + statusCheck(AMBIENT_HOPPER_BRAZIERS));
         
         //Recipes
         settings.add(ChatColor.GOLD + "Recipes:");
